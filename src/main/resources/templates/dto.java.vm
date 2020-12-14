@@ -1,0 +1,32 @@
+package ${package.dto};
+
+#if(${entityLombokModel})
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+#end
+
+#if(${superDtoClass})
+import ${superDtoPackage};
+#end
+
+/**
+ * $!{table.comment}
+ *
+ * @author ${author}
+ */
+#if(${entityLombokModel} and ${superDtoClass})
+@Data
+@EqualsAndHashCode(callSuper = true)
+#elseif(${entityLombokModel})
+@Data
+@EqualsAndHashCode
+#end
+#if(${superDtoClass})
+public class ${dtoName} extends ${superDtoClass}{
+
+}
+#else
+public class ${dtoName} {
+
+}
+#end

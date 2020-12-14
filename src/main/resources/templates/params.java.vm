@@ -1,0 +1,31 @@
+package ${package.params};
+
+#if(${entityLombokModel})
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+#end
+
+#if(${superParamsClass})
+import ${superParamsPackage};
+#end
+
+/**
+ * $!{table.comment}
+ *
+ * @author ${author}
+ */
+#if(${entityLombokModel} and ${superParamsClass})
+@Data
+@EqualsAndHashCode(callSuper = true)
+#elseif(${entityLombokModel})
+@Data
+@EqualsAndHashCode
+#end
+#if(${superParamsClass})
+public class ${paramsName} extends ${superParamsClass} {
+}
+#else
+public class ${paramsName} {
+
+}
+#end
