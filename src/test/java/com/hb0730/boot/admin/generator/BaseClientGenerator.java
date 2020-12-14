@@ -65,12 +65,12 @@ public class BaseClientGenerator {
         //扩展配置
         ExtConfig extConfig = new ExtConfig();
         extConfig.setDtoClass("%s" );
-        extConfig.setParamsPackage("%s" );
+        extConfig.setParamsClass("%s" );
         extConfig.setIdType2("Long" );
         extConfig.setSuperParamsClass("com.hb0730.boot.admin.domain.model.query.BaseParams" );
         extConfig.setSuperDtoClass("com.hb0730.boot.admin.domain.model.dto.BaseDTO" );
-        extConfig.setParamsPackage("params" );
-        extConfig.setDtoPackage("dto" );
+        extConfig.setParamsPackage("model.params" );
+        extConfig.setDtoPackage("model.dto" );
         mp.setExtConfig(extConfig);
         //模板配置
 

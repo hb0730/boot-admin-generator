@@ -26,28 +26,14 @@ public class VelocityTemplateEngineExt extends VelocityTemplateEngine {
 
     @Override
     public AbstractTemplateEngine batchOutput() {
-        try {
-            List<TableInfo> tableInfoList = getConfigBuilder().getTableInfoList();
-            for (TableInfo tableInfo : tableInfoList) {
-                Map<String, Object> objectMap = getObjectMap(tableInfo);
-                Map<String, String> pathInfo = getConfigBuilder().getPathInfo();
-                TemplateConfig template = getConfigBuilder().getTemplate();
-                ExtConfig extConfig = ((ConfigBuilderExt) getConfigBuilder()).getExtConfig();
-                // 自定义内容
-                InjectionConfig injectionConfig = getConfigBuilder().getInjectionConfig();
-                if (null != injectionConfig) {
-                    injectionConfig.initTableMap(tableInfo);
-                    objectMap.put("cfg", injectionConfig.getMap());
-                    List<FileOutConfig> focList = injectionConfig.getFileOutConfigList();
-                    if (CollectionUtils.isNotEmpty(focList)) {
-                        for (FileOutConfig foc : focList) {
-                            if (isCreate(FileType.OTHER, foc.outputFile(tableInfo))) {
-                                writerFile(objectMap, foc.getTemplatePath(), foc.outputFile(tableInfo));
-                            }
-                        }
-                    }
-                }
-                String entityName = tableInfo.getEntityName();
+        super.batchOutput();
+        List<TableInfo> tableInfoList = getConfigBuilder().getTableInfoList();
+        for (TableInfo tableInfo : tableInfoList) {
+            Map<String, String> pathInfo = getConfigBuilder().getPathInfo();
+            Map<String, Object> objectMap = getObjectMap(tableInfo);
+            ExtConfig extConfig = ((ConfigBuilderExt) getConfigBuilder()).getExtConfig();
+            String entityName = tableInfo.getEntityName();
+            try {
                 //params
                 if (null != extConfig.getParamsPackage() && null != pathInfo.get(ConstValExt.PARAMS_PATH)) {
                     String paramsFile = String.format(pathInfo.get(ConstValExt.PARAMS_PATH) + File.separator + "%sParams" + suffixJavaOrKt(), entityName);
@@ -63,51 +49,10 @@ public class VelocityTemplateEngineExt extends VelocityTemplateEngine {
                         writerFile(objectMap, templateFilePath(ConstValExt.DTO_TEMPLATE_JAVA), paramsFile);
                     }
                 }
-                // Mp.java
-                if (null != entityName && null != pathInfo.get(ConstVal.ENTITY_PATH)) {
-                    String entityFile = String.format((pathInfo.get(ConstVal.ENTITY_PATH) + File.separator + "%s" + suffixJavaOrKt()), entityName);
-                    if (isCreate(FileType.ENTITY, entityFile)) {
-                        writerFile(objectMap, templateFilePath(template.getEntity(getConfigBuilder().getGlobalConfig().isKotlin())), entityFile);
-                    }
-                }
-                // MpMapper.java
-                if (null != tableInfo.getMapperName() && null != pathInfo.get(ConstVal.MAPPER_PATH)) {
-                    String mapperFile = String.format((pathInfo.get(ConstVal.MAPPER_PATH) + File.separator + tableInfo.getMapperName() + suffixJavaOrKt()), entityName);
-                    if (isCreate(FileType.MAPPER, mapperFile)) {
-                        writerFile(objectMap, templateFilePath(template.getMapper()), mapperFile);
-                    }
-                }
-                // MpMapper.xml
-                if (null != tableInfo.getXmlName() && null != pathInfo.get(ConstVal.XML_PATH)) {
-                    String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName);
-                    if (isCreate(FileType.XML, xmlFile)) {
-                        writerFile(objectMap, templateFilePath(template.getXml()), xmlFile);
-                    }
-                }
-                // IMpService.java
-                if (null != tableInfo.getServiceName() && null != pathInfo.get(ConstVal.SERVICE_PATH)) {
-                    String serviceFile = String.format((pathInfo.get(ConstVal.SERVICE_PATH) + File.separator + tableInfo.getServiceName() + suffixJavaOrKt()), entityName);
-                    if (isCreate(FileType.SERVICE, serviceFile)) {
-                        writerFile(objectMap, templateFilePath(template.getService()), serviceFile);
-                    }
-                }
-                // MpServiceImpl.java
-                if (null != tableInfo.getServiceImplName() && null != pathInfo.get(ConstVal.SERVICE_IMPL_PATH)) {
-                    String implFile = String.format((pathInfo.get(ConstVal.SERVICE_IMPL_PATH) + File.separator + tableInfo.getServiceImplName() + suffixJavaOrKt()), entityName);
-                    if (isCreate(FileType.SERVICE_IMPL, implFile)) {
-                        writerFile(objectMap, templateFilePath(template.getServiceImpl()), implFile);
-                    }
-                }
-                // MpController.java
-                if (null != tableInfo.getControllerName() && null != pathInfo.get(ConstVal.CONTROLLER_PATH)) {
-                    String controllerFile = String.format((pathInfo.get(ConstVal.CONTROLLER_PATH) + File.separator + tableInfo.getControllerName() + suffixJavaOrKt()), entityName);
-                    if (isCreate(FileType.CONTROLLER, controllerFile)) {
-                        writerFile(objectMap, templateFilePath(template.getController()), controllerFile);
-                    }
-                }
+            } catch (Exception e) {
+                logger.error("无法创建文件，请检查配置信息！", e);
             }
-        } catch (Exception e) {
-            logger.error("无法创建文件，请检查配置信息！", e);
+
         }
         return this;
     }
