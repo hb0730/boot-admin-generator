@@ -2,12 +2,12 @@ package com.hb0730.boot.admin.generator;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.hb0730.boot.admin.generator.config.ExtConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class BaseClientGenerator {
     public static void main(String[] args) {
-        AutoGenerator mp = new AutoGenerator();
+        AutoGeneratorExt mp = new AutoGeneratorExt();
         //数据源
         DataSourceConfig sourceConfig = new DataSourceConfig();
         sourceConfig
@@ -62,6 +62,16 @@ public class BaseClientGenerator {
                 .setController("controller" );
         mp.setPackageInfo(packageConfig);
 
+        //扩展配置
+        ExtConfig extConfig = new ExtConfig();
+        extConfig.setDtoClass("%s" );
+        extConfig.setParamsPackage("%s" );
+        extConfig.setIdType2("Long" );
+        extConfig.setSuperParamsClass("com.hb0730.boot.admin.domain.model.query.BaseParams" );
+        extConfig.setSuperDtoClass("com.hb0730.boot.admin.domain.model.dto.BaseDTO" );
+        extConfig.setParamsPackage("params" );
+        extConfig.setDtoPackage("dto" );
+        mp.setExtConfig(extConfig);
         //模板配置
 
         //全局策略 globalConfig 配置

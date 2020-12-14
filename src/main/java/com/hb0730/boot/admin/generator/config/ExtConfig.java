@@ -23,7 +23,7 @@ public class ExtConfig {
     /**
      * params包名
      */
-    public String params = "params";
+    public String paramsPackage = "params";
     /**
      * 需要继承的DTO
      */
@@ -35,7 +35,7 @@ public class ExtConfig {
     /**
      * dto包名
      */
-    public String dto = "dto";
+    public String dtoPackage = "dto";
 
     /**
      * id类型

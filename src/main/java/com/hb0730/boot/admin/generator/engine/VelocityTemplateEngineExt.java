@@ -49,7 +49,7 @@ public class VelocityTemplateEngineExt extends VelocityTemplateEngine {
                 }
                 String entityName = tableInfo.getEntityName();
                 //params
-                if (null != extConfig.getParams() && null != pathInfo.get(ConstValExt.PARAMS_PATH)) {
+                if (null != extConfig.getParamsPackage() && null != pathInfo.get(ConstValExt.PARAMS_PATH)) {
                     String paramsFile = String.format(pathInfo.get(ConstValExt.PARAMS_PATH) + File.separator + "%sParams" + suffixJavaOrKt(), entityName);
                     if (isCreate(FileType.OTHER, paramsFile)) {
                         writerFile(objectMap, templateFilePath(ConstValExt.PARAMS_TEMPLATE_JAVA), paramsFile);
@@ -57,7 +57,7 @@ public class VelocityTemplateEngineExt extends VelocityTemplateEngine {
                 }
 
                 //dto
-                if (null != extConfig.getDto() && null != pathInfo.get(ConstValExt.DTO_PATH)) {
+                if (null != extConfig.getDtoPackage() && null != pathInfo.get(ConstValExt.DTO_PATH)) {
                     String paramsFile = String.format(pathInfo.get(ConstValExt.DTO_PATH) + File.separator + "%sDTO" + suffixJavaOrKt(), entityName);
                     if (isCreate(FileType.OTHER, paramsFile)) {
                         writerFile(objectMap, templateFilePath(ConstValExt.DTO_TEMPLATE_JAVA), paramsFile);

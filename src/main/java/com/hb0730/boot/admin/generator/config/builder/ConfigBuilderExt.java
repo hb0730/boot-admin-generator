@@ -42,8 +42,8 @@ public class ConfigBuilderExt extends ConfigBuilder {
     protected void handlerPackageExt(String outputDir, PackageConfig config) {
         // 包信息
         Map<String, String> packageInfo = this.getPackageInfo();
-        packageInfo.put(ConstValExt.DTO, joinPackage(config.getParent(), extConfig.getDto()));
-        packageInfo.put(ConstValExt.PARAMS, joinPackage(config.getParent(), extConfig.getParams()));
+        packageInfo.put(ConstValExt.DTO, joinPackage(config.getParent(), extConfig.getDtoPackage()));
+        packageInfo.put(ConstValExt.PARAMS, joinPackage(config.getParent(), extConfig.getParamsPackage()));
 
         //// 生成路径信息
         setPathInfo(getPathInfo(), ConstValExt.DTO_TEMPLATE_JAVA, outputDir, ConstValExt.DTO_PATH, ConstValExt.DTO);
