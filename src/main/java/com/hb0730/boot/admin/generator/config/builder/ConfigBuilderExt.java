@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class ConfigBuilderExt extends ConfigBuilder {
     @Getter
-    private ExtConfig extConfig;
+    private final ExtConfig extConfig;
 
     /**
      * 在构造器中处理配置

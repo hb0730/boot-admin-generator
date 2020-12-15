@@ -1,12 +1,7 @@
 package com.hb0730.boot.admin.generator.engine;
 
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.ConstVal;
-import com.baomidou.mybatisplus.generator.config.FileOutConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.FileType;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
@@ -66,11 +61,11 @@ public class VelocityTemplateEngineExt extends VelocityTemplateEngine {
         map.put("superDtoClass", getSuperClassName(extConfig.getSuperDtoClass()));
         map.put("superDtoPackage", extConfig.getSuperDtoClass());
         map.put("dtoClass", getSuperClassName(format(extConfig.getDtoClass(), tableInfo.getEntityName())));
-        map.put("dtoName", getSuperClassName(format(extConfig.getDtoClass(), tableInfo.getEntityName())) + "DTO" );
+        map.put("dtoName", getSuperClassName(format(extConfig.getDtoClass(), tableInfo.getEntityName())) + "DTO");
         map.put("superParamsClass", getSuperClassName(extConfig.getSuperParamsClass()));
         map.put("superParamsPackage", extConfig.getSuperParamsClass());
         map.put("paramsClass", getSuperClassName(format(extConfig.getParamsClass(), tableInfo.getEntityName())));
-        map.put("paramsName", getSuperClassName(format(extConfig.getParamsClass(), tableInfo.getEntityName())) + "Params" );
+        map.put("paramsName", getSuperClassName(format(extConfig.getParamsClass(), tableInfo.getEntityName())) + "Params");
 
         return map;
     }
