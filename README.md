@@ -2,7 +2,7 @@
 
 boot-admin code generator
 
-基于[mybatis-plus](https://github.com/baomidou/mybatis-plus) 的 `mybatis-plus-generator`
+基于[mybatis-plus:3.4.0](https://github.com/baomidou/mybatis-plus) 的 `mybatis-plus-generator`
 适配 [boot-admin](https://github.com/hb0730/boot-admin) 的代码生成
 
 只实现了对[velocity](http://velocity.apache.org/) 的支持
@@ -48,5 +48,6 @@ public String dto="dto";
  * id类型 （对应超类中Id泛型类型）
  */
 public String idType2="String";
-        }
 ```
+
+**注意:** **mybatis-plus从3.5.0开始[代码生成器独立维护](https://github.com/baomidou/generator) 写法好像发生了变法，所以有可能不支持现有升级**
