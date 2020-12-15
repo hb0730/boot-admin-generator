@@ -16,6 +16,15 @@ public class ExtConfig {
      * 需要继承的基础params
      */
     public String superParamsClass;
+
+    public void setSuperParamsClass(String superParamsClass) {
+        this.superParamsClass = superParamsClass;
+    }
+
+    public void setSuperParamsClass(Class<?> superParamsClass) {
+        this.superParamsClass = superParamsClass.getName();
+    }
+
     /**
      * paramsName
      */
@@ -28,6 +37,15 @@ public class ExtConfig {
      * 需要继承的DTO
      */
     public String superDtoClass;
+
+    public void setSuperDtoClass(String superDtoClass) {
+        this.superDtoClass = superDtoClass;
+    }
+
+    public void setSuperDtoClass(Class<?> superDtoClass) {
+        this.superDtoClass = superDtoClass.getName();
+    }
+
     /**
      * dtoName
      */
